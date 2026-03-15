@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form</title>
+    <style>
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 200px;
+            margin-bottom: 10px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+        .personal label {
+            display: inline-block;
+            width: 80px;
+        }
+        .preferred {
+            padding-top: 0;
+        }
+        .preferred label {
+            display: inline;
+        }
+        .file-input {
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form>
+    <fieldset>
+        <legend>Contact information</legend>
+
+        <table>
+            <tr>
+                <td><label for="first-name">First name:</label></td>
+                <td>
+                    <input type="text" id="first-name" name="first-name">
+                    Preferred contact method:
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="last-name">Last name:</label></td>
+                <td>
+                    <input type="text" id="last-name" name="last-name">
+                    <label><input type="checkbox" name="preferred-contact" value="email"> Email</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td>
+                    <input type="email" id="email" name="email">
+                    <label><input type="checkbox" name="preferred-contact" value="telephone"> Telephone</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="telephone">Telephone:</label></td>
+                <td><input type="tel" id="telephone" name="telephone"></td>
+            </tr>
+        </table>
+</fieldset>
+        
+        <fieldset>
+            <legend>Feedback:</legend>
+            <label for="subject">Message subject:</label>
+            <input type="text" id="subject" name="subject"><br>
+            
+            <textarea id="message" name="message"></textarea><br>
+            
+            <div class="file-input">
+                <label for="file">Attach a file:</label>
+                <input type="file" id="file" name="file">
+            </div>
+            
+            <button type="submit">Send</button>
+        </fieldset>
+    </form>
+</body>
+</html>
