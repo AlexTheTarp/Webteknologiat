@@ -1,139 +1,65 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <meta charset="UTF-8">
-    <title>Kurssini LAB-ammattikorkeakoulussa</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kurssini LAB-ammattikorkeakoulussa</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/kurssit.css">
 </head>
 <body>
-    <h1>Käymäni kurssit</h1>
-    <p>Tässä lista kursseista LAB-ammattikorkeakoulussa.</p>
-   
-    <table>
-        <tr>
-            <th>Nimi</th>
-            <th>Sisältö</th>
-            <th>Opintopisteet</th>
-        </tr>
-        <tr>
-            <td>Asiantuntijan viestintätaidot</td>
-            <td>Ammatillinen viestintä suomeksi.</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td>Ohjelmoinnin perusteet</td>
-            <td>Ohjelmoinnin alkeet, kuten Java tai Python.</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Tietokannat</td>
-            <td>Tietokantojen suunnittelu ja SQL.</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Olio-ohjelmoinnin perusteet</td>
-            <td>OOP-käsitteet kuten luokat ja perintä.</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Asiakkuudet ja markkinointi</td>
-            <td>Asiakassuhteet ja markkinointi.</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Taloushallinto</td>
-            <td>Kirjanpito ja budjetointi.</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>Työvälineosaaminen</td>
-            <td>Työvälineet ja ohjelmistot.</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>Intercultural Awareness</td>
-            <td>Kulttuurienvälinen osaaminen.</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>English Prep Course</td>
-            <td>Englannin valmistava kurssi.</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>Liiketalouden matematiikan perusteet</td>
-            <td>Liiketalouden matematiikka.</td>
-            <td>3</td>
-        </tr>
-    </table>
-   
+
+<div class="container">
+  <h1>Käymäni kurssit</h1>
+  <p>Tässä lista kursseista LAB-ammattikorkeakoulussa.</p>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <h3>Asiantuntijan viestintätaidot</h3>
+      <p>Ammatillinen viestintä suomeksi.</p>
+      <div class="credits">4 op</div>
+    </div>
+    
+    <div class="course-card">
+      <h3>Ohjelmoinnin perusteet</h3>
+      <p>Ohjelmoinnin alkeet, kuten Java tai Python.</p>
+      <div class="credits">5 op</div>
+    </div>
+    
+    <div class="course-card">
+      <h3>Tietokannat</h3>
+      <p>Tietokantojen suunnittelu ja SQL.</p>
+      <div class="credits">5 op</div>
+    </div>
+    <div class="course-card">
+      <h3>Olio-ohjelmoinnin perusteet</h3>
+      <p>OOP-käsitteet kuten luokat ja perintä.</p>
+      <div class="credits">5 op</div>
+    </div>
+  </div>
+
+  <section>
     <h2>Lisätietoja</h2>
-    <ol>
-        <li>Asiantuntijan viestintätaidot
-            <ul>
-                <li>Kirjoittaminen</li>
-                <li>Esitykset</li>
-            </ul>
-        </li>
-        <li>Ohjelmoinnin perusteet
-            <ul>
-                <li>Muuttujat</li>
-                <li>Funktiot</li>
-            </ul>
-        </li>
-        <li>Tietokannat
-            <ul>
-                <li>SQL</li>
-                <li>Suunnittelu</li>
-            </ul>
-        </li>
-        <li>Olio-ohjelmoinnin perusteet
-            <ul>
-                <li>Luokat</li>
-                <li>Perintä</li>
-            </ul>
-        </li>
-        <li>Asiakkuudet ja markkinointi
-            <ul>
-                <li>Asiakkaat</li>
-                <li>Markkinointi</li>
-            </ul>
-        </li>
-        <li>Taloushallinto
-            <ul>
-                <li>Kirjanpito</li>
-                <li>Budjetit</li>
-            </ul>
-        </li>
-        <li>Työvälineosaaminen
-            <ul>
-                <li>Ohjelmistot</li>
-                <li>Suunnittelu</li>
-            </ul>
-        </li>
-        <li>Intercultural Awareness
-            <ul>
-                <li>Kulttuurit</li>
-                <li>Viestintä</li>
-            </ul>
-        </li>
-        <li>English Prep Course
-            <ul>
-                <li>Kielioppi</li>
-                <li>Puhuminen</li>
-            </ul>
-        </li>
-        <li>Liiketalouden matematiikan perusteet
-            <ul>
-                <li>Algebra</li>
-                <li>Tilastot</li>
-            </ul>
-        </li>
-    </ol>
+    <dl class="course-details">
+      <dt>Asiantuntijan viestintätaidot</dt>
+      <dd>
+        <ul>
+          <li>Kirjoittaminen</li>
+          <li>Esitykset</li>
+        </ul>
+      </dd>
+      
+      <dt>Ohjelmoinnin perusteet</dt>
+      <dd>
+        <ul>
+          <li>Muuttujat</li>
+          <li>Funktiot</li>
+        </ul>
+      </dd>
+      
+    </dl>
+  </section>
+</div>
+
 </body>
 </html>
