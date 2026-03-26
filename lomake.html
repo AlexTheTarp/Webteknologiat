@@ -1,69 +1,70 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ota yhteyttä</title>
+  <title>Contact Us</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/lomake.css">
 </head>
 <body>
 
 <div class="container">
-  <h1>Ota yhteyttä</h1>
+  <h1>Contact Us</h1>
 
   <form>
     <fieldset>
-      <legend>Contact information:</legend>
+      <legend>Contact Information</legend>
 
       <div class="form-row">
-        <label for="first-name">Etunimi</label>
+        <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first-name" required>
       </div>
 
       <div class="form-row">
-        <label for="last-name">Sukunimi</label>
+        <label for="last-name">Last Name</label>
         <input type="text" id="last-name" name="last-name" required>
       </div>
 
       <div class="form-row">
-        <label for="email">Sähköposti</label>
+        <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
       </div>
 
       <div class="form-row">
-        <label for="telephone">Puhelin</label>
+        <label for="telephone">Phone</label>
         <input type="tel" id="telephone" name="telephone">
       </div>
 
       <div class="checkbox-group">
-        <p>Ensisijainen yhteydenottotapa:</p>
-        <label><input type="checkbox" name="preferred-contact" value="email"> Sähköposti</label>
-        <label><input type="checkbox" name="preferred-contact" value="telephone"> Puhelin</label>
+        <p>Preferred contact method:</p>
+        <label><input type="checkbox" name="preferred-contact" value="email"> Email</label>
+        <label><input type="checkbox" name="preferred-contact" value="telephone"> Phone</label>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Feedback:</legend>
+      <legend>Feedback</legend>
 
       <div class="grid feedback-grid">
         <div class="field span-2">
-          <label for="subject">Message subject:</label>
+          <label for="subject">Subject</label>
           <input type="text" id="subject" name="subject" />
         </div>
 
         <div class="field span-2">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="10" placeholder="Write message here"></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="12" 
+                    placeholder="Please write your message here..."></textarea>
         </div>
 
         <div class="field file-row">
-          <label for="file">Attach a file:</label>
+          <label for="file">Attach a file (optional)</label>
           <input type="file" id="file" name="file" />
         </div>
 
         <div class="actions">
-          <input type="submit" value="Send" class="submit-btn" />
+          <input type="submit" value="Send Message" class="submit-btn" />
         </div>
       </div>
     </fieldset>
