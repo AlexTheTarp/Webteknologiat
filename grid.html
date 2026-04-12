@@ -1,26 +1,422 @@
 <!DOCTYPE html>
 <html lang="fi">
-
 <head>
-    <title> Ensimmäinen sivu </title>
-    <link type="text/css" rel="stylesheet" href="css/grid.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Opetussivu HTML-perusteista: rakenne & tagit.">
+    <title>HTML-perusteet • Bootstrap 5 • Webteknologiat</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+M"
+            crossorigin="anonymous">
+    
+    <style>
+        :root {
+            --bs-body-bg: #0d6efd;
+        }
+        .tag-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tag-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15);
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .demo-box {
+            background-color: #ffffff;
+            border: 2px dashed #0d6efd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            min-height: 120px;
+        }
+        .navbar-brand {
+            font-weight: 700;
+        }
+        section {
+            scroll-margin-top: 80px;
+        }
+        
+    </style>
 </head>
 <body>
-    <div class="grid-container">
-        <div class="header">
-            <h1> Sivun otsikko  </h1>
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark sticky-top shadow-sm">
+        <div class="container">
+
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <span class="fs-3">📘</span>
+                <span class="ms-2">HTML-perusteet</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rakenne">Perusrakenne</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tagit">Tagit esittelyssä</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#muotoilu">CSS &amp; Bootstrap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tehtavat">Kurssin tehtävät</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Lähteet
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://getbootstrap.com/" target="_blank">Bootstrap 5 kotisivu</a></li>
+                            <li><a class="dropdown-item" href="https://www.w3schools.com/bootstrap5/index.php" target="_blank">W3Schools Bootstrap 5</a></li>
+                            <li><a class="dropdown-item" href="https://getbootstrap.com/docs/5.3/layout/grid/" target="_blank">Bootstrap Grid</a></li>
+                            <li><a class="dropdown-item" href="https://getbootstrap.com/docs/5.3/components/card/" target="_blank">Card-komponentti</a></li>
+                            <li><a class="dropdown-item" href="https://getbootstrap.com/docs/5.3/components/navbar/" target="_blank">Navbar-komponentti</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="sidebar">
-            sivuvalikko
-        
-        </div>
-        <div class="main">
-         <h1> Pääsisältö </h1>
-        </div>
-        <div class="footer">
-            <h2> Alapalkki </h2>
+    </nav>
+
+    <div class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">HTML-sivun perusrakenne<br>ja tärkeimmät tagit</h1>
+                    <p class="lead fs-4 mt-3">Tervetuloa opetussivulle! Täällä opit HTML-dokumentin rakenteen ja keskeisimmät tagit. Sivun ulkoasu on toteutettu kokonaan <strong>Bootstrap 5:llä</strong> – responsiivinen, moderni ja helppo.</p>
+                    <a href="#rakenne" class="btn btn-light btn-lg me-3">Aloita perusrakenteesta →</a>
+                    <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" class="btn btn-outline-light btn-lg">Bootstrap-dokumentaatio</a>
+                </div>
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <div class="p-4 bg-white text-primary rounded-4 shadow" style="max-width: 280px; margin: 0 auto;">
+                        <h5 class="mb-0">Tämä sivu käyttää</h5>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <span class="badge bg-primary fs-6 px-3 py-2">Navbar</span>
+                            <span class="badge bg-primary fs-6 px-3 py-2">Cards</span>
+                            <span class="badge bg-primary fs-6 px-3 py-2">Grid</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="container my-5">
+        <section id="rakenne" class="mb-6">
+            <h2 class="border-bottom pb-3 mb-4">1. HTML-dokumentin perusrakenne</h2>
+            
+            <div class="row">
+                <div class="col-lg-7">
+                    <p class="lead">Jokainen HTML-sivu alkaa samasta rungosta. Selain tarvitsee nämä tagit, jotta se osaa tulkita sivun oikein.</p>
+                    <p>Koko sivun rakenne näyttää tältä (käytä &amp;lt; ja &amp;gt; kun haluat näyttää tagit selaimessa):</p>
+                    
+                    <pre class="code-example">&lt;!doctype html&gt;
+&lt;html lang="fi"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Otsikko&lt;/title&gt;
+    &lt;!-- CSS-linkit ja Bootstrap tulevat tähän --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Kaikki näkyvä sisältö tähän --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+    </div>
+
+    <div class="col-lg-5">
+                    <div class="demo-box">
+                        <strong>Esimerkki renderöitynä:</strong>
+                        <div class="mt-3 p-3 border rounded bg-light">
+                            <h1 class="h5 text-primary">Tämä on &lt;body&gt;-osion sisältöä</h1>
+                            <p>Selain näyttää vain &lt;body&gt;-osion.</p>
+                        </div>
+                    </div>
+                    <small class="text-muted">Huom! &lt;head&gt;-osion sisältö ei näy käyttäjälle.</small>
+                </div>
+            </div>
+            
+            <div class="alert alert-info mt-4">
+                <strong>Bootstrap-vinkki:</strong> Käytä aina <code>&lt;meta name="viewport"&gt;</code> -tagia, jotta Bootstrapin responsiivinen grid toimii oikein kaikilla näytöillä.
+            </div>
+        </section>
+
+        <section id="tagit" class="mb-6">
+            <h2 class="border-bottom pb-3 mb-4">2. Tärkeimmät tagit esittelyssä</h2>
+            <p class="lead mb-4">Tässä kahdeksan keskeistä tagia, joita tarvitaan lähes jokaisessa HTML-sivussa. Jokainen esimerkki sisältää selityksen, koodin ja live-demoversion.</p>
+
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card border-primary">
+                        <div class="card-header bg-primary text-white fw-bold">&lt;html&gt;</div>
+                        <div class="card-body">
+                            <p>Koko dokumentin juuri. Kaikki muu sisältö tulee tämän sisään.</p>
+                            <pre class="code-example small">&lt;html lang="fi"&gt; ... &lt;/html&gt;</pre>
+                            <div class="demo-box mt-3 text-center">
+                                <span class="badge bg-success">Koko sivun juuri</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card">
+                        <div class="card-header fw-bold">&lt;head&gt;</div>
+                        <div class="card-body">
+                            <p>Metatiedot, otsikko, CSS-linkit ja Bootstrap-CDN. Ei näy käyttäjälle.</p>
+                            <pre class="code-example small">&lt;head&gt;
+  &lt;title&gt;Sivun nimi&lt;/title&gt;
+&lt;/head&gt;</pre>
+                            <div class="demo-box mt-3 text-center text-muted">
+                                Ei näkyvää sisältöä
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card">
+                        <div class="card-header fw-bold">&lt;body&gt;</div>
+                        <div class="card-body">
+                            <p>Näkyvä sisältö: tekstit, kuvat, linkit jne.</p>
+                            <pre class="code-example small">&lt;body&gt;
+  &lt;h1&gt;Hei maailma!&lt;/h1&gt;
+&lt;/body&gt;</pre>
+                            <div class="demo-box mt-3">
+                                <h1 class="h5">Hei maailma!</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card border-warning">
+                        <div class="card-header fw-bold">&lt;h1&gt;</div>
+                        <div class="card-body">
+                            <p>Pääotsikko (suurin otsikkotaso). Käytä vain kerran sivulla.</p>
+                            <pre class="code-example small">&lt;h1&gt;Pääotsikko&lt;/h1&gt;</pre>
+                            <div class="demo-box mt-3">
+                                <h1 class="h4 text-warning">Pääotsikko</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card">
+                        <div class="card-header fw-bold">&lt;p&gt;</div>
+                        <div class="card-body">
+                            <p>Kappale tekstiä. Automaattisesti riviväli.</p>
+                            <pre class="code-example small">&lt;p&gt;Tämä on kappale.&lt;/p&gt;</pre>
+                            <div class="demo-box mt-3">
+                                <p>Tämä on kappale tekstiä Bootstrap-sivulla.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card">
+                        <div class="card-header fw-bold">&lt;a&gt;</div>
+                        <div class="card-body">
+                            <p>Hyperlinkki toiseen sivuun tai paikkaan.</p>
+                            <pre class="code-example small">&lt;a href="https://getbootstrap.com/"&gt;Linkki&lt;/a&gt;</pre>
+                            <div class="demo-box mt-3">
+                                <a href="https://getbootstrap.com/" target="_blank" class="btn btn-sm btn-outline-primary">Avaa Bootstrapin kotisivu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card border-success">
+                        <div class="card-header fw-bold">&lt;img&gt;</div>
+                        <div class="card-body">
+                            <p>Kuva. Pakolliset attribuutit: <code>src</code> ja <code>alt</code>.</p>
+                            <pre class="code-example small">&lt;img src="kuva.jpg" alt="Kuvaus" class="img-fluid"&gt;</pre>
+                            <div class="demo-box mt-3 text-center">
+                                <img src="https://picsum.photos/id/1015/300/180" 
+                                     alt="Esimerkkikuva maisemasta" 
+                                     class="img-fluid rounded shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 tag-card">
+                        <div class="card-header fw-bold">&lt;br&gt;</div>
+                        <div class="card-body">
+                            <p>Rivinvaihto (ei sulkevaa tagia).</p>
+                            <pre class="code-example small">Rivi 1&lt;br&gt;Rivi 2</pre>
+                            <div class="demo-box mt-3">
+                                Rivi 1<br>Rivi 2<br>Rivi 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="muotoilu" class="mb-6">
+            <h2 class="border-bottom pb-3 mb-4">3. Sivun muotoilu CSS:llä ja valmiilla kirjastoilla</h2>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>CSS-muotoilusäännöt</h4>
+                    <p>Voit muokata elementtien ulkoasua kolmella tavalla:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Inline:</strong> <code>&lt;p style="color: red; font-size: 1.2rem;"&gt;</code></li>
+                        <li class="list-group-item"><strong>Internal:</strong> <code>&lt;style&gt;</code> -tagi <code>&lt;head&gt;</code>-osiossa</li>
+                        <li class="list-group-item"><strong>External:</strong> erillinen <code>styles.css</code>-tiedosto, joka linkitetään <code>&lt;link rel="stylesheet"&gt;</code></li>
+                    </ul>
+                    <p class="mt-3">Esimerkki CSS-säännöstä:</p>
+                    <pre class="code-example">p {
+  color: #212529;
+  line-height: 1.6;
+}</pre>
+                </div>
+                
+                <div class="col-lg-6">
+                    <h4>Valmiit CSS-kirjastot (Bootstrap 5)</h4>
+                    <p class="lead">Bootstrap helpottaa huomattavasti sivujen kehitystä:</p>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <strong>Valmiit komponentit</strong><br>
+                                    Navbar, Card, Button, Modal…
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <strong>12-sarakkeen grid</strong><br>
+                                    Responsiivinen asettelu eri näytöille
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <strong>Värit &amp; typografia</strong><br>
+                                    <code>.btn-primary</code>, <code>.text-success</code>, <code>.bg-light</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-0 bg-light h-100">
+                                <div class="card-body">
+                                    <strong>Responsiivisuus</strong><br>
+                                    <code>.col-md-6</code>, <code>.col-lg-4</code> jne.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-success mt-4">
+                        <strong>Edut:</strong> Yhtenäinen ulkoasu kaikilla selaimilla, nopea kehitys ja automaattinen mobiilioptimointi. Voit myös muokata Bootstrapia omilla CSS-tiedostoillasi tai Sassilla.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h5 class="mb-3">Esimerkki Bootstrap-gridistä (käytetty myös tällä sivulla)</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="bg-primary text-white text-center p-4 rounded-3">.col-md-4</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-success text-white text-center p-4 rounded-3">.col-md-4</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-info text-white text-center p-4 rounded-3">.col-md-4</div>
+                    </div>
+                </div>
+                <p class="text-muted small mt-2">Sarakkeiden määrä muuttuu automaattisesti näytön leveyden mukaan.</p>
+            </div>
+        </section>
+
+        <section id="tehtavat" class="mb-5">
+            <h2 class="border-bottom pb-3 mb-4">4. Kurssin aikaisemmat tehtävät (GitHub Pages)</h2>
+            <p class="lead">Alla linkit aiemmin tekemiisi tehtäviin GitHub Pages -palvelussa. Voit helposti lisätä omat linkkisi tähän osioon.</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Tehtävä 1 – Ensimmäinen HTML-sivu</h5>
+                            <p class="card-text text-muted">Perus HTML-rakenne ilman Bootstrapia.</p>
+                            <a href="https://esimerkki.github.io/tehtava1/" target="_blank" 
+                               class="btn btn-outline-primary w-100">Avaa GitHub Pagesissa →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Tehtävä 2 – CSS-muotoilu</h5>
+                            <p class="card-text text-muted">Inline-, internal- ja external-CSS.</p>
+                            <a href="https://esimerkki.github.io/tehtava2/" target="_blank" 
+                               class="btn btn-outline-primary w-100">Avaa GitHub Pagesissa →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Tehtävä 3 – Flex &amp; Grid</h5>
+                            <p class="card-text text-muted">CSS Flexbox ja Grid -asettelu.</p>
+                            <a href="https://esimerkki.github.io/tehtava3/" target="_blank" 
+                               class="btn btn-outline-primary w-100">Avaa GitHub Pagesissa →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <small class="text-muted">Korvaa yllä olevat linkit omilla GitHub Pages -osoitteillasi!</small>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; Webteknologiat-opetus • Bootstrap 5 -opetussivu</p>
+                    <p class="small mb-0">Toteutettu kurssin materiaalien (Bootstrap 5.pdf &amp; Grid.pdf) pohjalta</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="https://getbootstrap.com/" target="_blank" class="text-white text-decoration-none me-3">Bootstrap</a>
+                    <a href="https://www.w3schools.com/html/" target="_blank" class="text-white text-decoration-none me-3">W3Schools HTML</a>
+                    <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-white text-decoration-none">Takaisin ylös ↑</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+            crossorigin="anonymous"></script>
 </body>
-</html>
+</html> 
