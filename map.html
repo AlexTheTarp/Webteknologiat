@@ -1,23 +1,65 @@
-window.onload = function() {
-    let address = "Yliopistonkatu 36";
-    let city = "Lappeenranta";
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartta</title>
+    <link rel="stylesheet" href="css/common.css">
     
-    let place = "https://www.google.com/maps?q=" + address + city + "&output=embed";
+    <!-- Leaflet CSS (popular and free map library) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    let iframeElement = document.getElementById("map-frame");
-    iframeElement.src = place;
-    
-    console.log("Kartta ladattu oletusosoitteella: " + address + " " + city);
-};
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
 
-function haeKartta() {
-    let address = document.getElementById("addr-field").value;
-    let city = document.getElementById("city-field").value;
+<div class="container">
+    <h1>Kartta</h1>
+    <p>Tässä on interaktiivinen kartta (esimerkkinä Jyväskylä tai haluamasi sijainti).</p>
     
-    let place = "https://www.google.com/maps?q=" + address + city + "&output=embed";
-    
-    let iframeElement = document.getElementById("map-frame");
-    iframeElement.src = place;
-    
-    console.log("Kartta päivitetty osoitteella: " + address + " " + city);
-}
+    <!-- The map container -->
+    <div id="map"></div>
+</div>
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Initialize the map
+const map = L.map('map').setView([62.2415, 25.7490], 13);  // Center on Jyväskylä area
+
+// Add OpenStreetMap tiles (free)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Optional: Add a marker (change coordinates if you want)
+L.marker([62.2415, 25.7490]).addTo(map)
+    .bindPopup('<b>Esimerkki sijainti</b><br>Täällä voisi olla esim. LAB-ammattikorkeakoulu.')
+    .openPopup();
+
+</script>
+
+</body>
+</html>
