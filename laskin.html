@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laskin</title>
+    <link rel="stylesheet" href="css/common.css"> 
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .number-box {
+            display: inline-block;
+            margin: 15px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 80px;
+            font-size: 2em;
+            text-align: center;
+            padding: 10px;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        select, #laskeBtn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 20px 10px;
+        }
+        #tulos {
+            margin-top: 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+            min-height: 60px;
+        }
+        dialog {
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        dialog button {
+            margin-top: 15px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Yksinkertainen Laskin</h1>
+
+    <div class="number-box">
+        <p>Luku A</p>
+        <button onclick="muutaLukua('a', -1)">–</button>
+        <input type="number" id="numA" min="1" max="10" value="5" readonly>
+        <button onclick="muutaLukua('a', 1)">+</button>
+    </div>
+
+    <div class="number-box">
+        <p>Luku B</p>
+        <button onclick="muutaLukua('b', -1)">–</button>
+        <input type="number" id="numB" min="1" max="10" value="3" readonly>
+        <button onclick="muutaLukua('b', 1)">+</button>
+    </div>
+
+    <br><br>
+
+    <select id="operaattori">
+        <option value="+">+</option>
+        <option value="-">–</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+
+    <button id="laskeBtn" onclick="laske()">Laske</button>
+
+    <div id="tulos">Tulos näkyy täällä</div>
+</div>
+
+<dialog id="virheDialog">
+    <p id="virheViesti"></p>
+    <button onclick="suljeDialog()">OK</button>
+</dialog>
+
+<script>
+function generoiSatunnaisetLuvut() {
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+    
+    document.getElementById("numA").value = a;
+    document.getElementById("numB").value = b;
+}
+
+function muutaLukua(kumpi, muutos) {
+    const id = kumpi === 'a' ? 'numA' : 'numB';
+    let arvo = parseInt(document.getElementById(id).value);
+    
+    arvo += muutos;
+    
+    if (arvo < 1) arvo = 1;
+    if (arvo > 10) arvo = 10;
+    
+    document.getElementById(id).value = arvo;
+}
+
+function laske() {
+    const numA = document.getElementById("numA").value;
+    const numB = document.getElementById("numB").value;
+    const op = document.getElementById("operaattori").value;
+
+    // Validointi
+    if (numA === "" || numB === "") {
+        naytaVirhe("Molemmat luvut ovat pakollisia!");
+        return;
+    }
+
+    const a = parseInt(numA);
+    const b = parseInt(numB);
+
+    if (isNaN(a) || isNaN(b) || a < 1 || a > 10 || b < 1 || b > 10) {
+        naytaVirhe("Lukujen tulee olla kokonaislukuja välillä 1–10.");
+        return;
+    }
+
+    if (op === "/" && b === 0) {
+        naytaVirhe("Jakaminen nollalla ei ole sallittua!");
+        return;
+    }
+
+    let tulos;
+    switch(op) {
+        case "+": tulos = a + b; break;
+        case "-": tulos = a - b; break;
+        case "*": tulos = a * b; break;
+        case "/": tulos = a / b; break;
+    }
+
+    document.getElementById("tulos").innerHTML = 
+        `${a} ${op} ${b} = <strong>${Number(tulos.toFixed(4))}</strong>`;
+}
+
+function naytaVirhe(viesti) {
+    document.getElementById("virheViesti").textContent = viesti;
+    document.getElementById("virheDialog").showModal();
+}
+
+function suljeDialog() {
+    document.getElementById("virheDialog").close();
+}
+
+window.onload = generoiSatunnaisetLuvut;
+</script>
+
+</body>
+</html>
