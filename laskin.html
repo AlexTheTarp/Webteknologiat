@@ -87,7 +87,11 @@
 
     <button id="laskeBtn" onclick="laske()">Laske</button>
 
-    <div id="tulos">Tulos näkyy täällä</div>
+    <div id="tulos">Tulos</div>
+
+    <h2>Laskuhistoria</h2>
+    <div id="historia">
+    </div>
 </div>
 
 <dialog id="virheDialog">
@@ -96,6 +100,9 @@
 </dialog>
 
 <script>
+
+let historia = [];
+
 function generoiSatunnaisetLuvut() {
     const a = Math.floor(Math.random() * 10) + 1;
     const b = Math.floor(Math.random() * 10) + 1;
@@ -121,7 +128,6 @@ function laske() {
     const numB = document.getElementById("numB").value;
     const op = document.getElementById("operaattori").value;
 
-    // Validointi
     if (numA === "" || numB === "") {
         naytaVirhe("Molemmat luvut ovat pakollisia!");
         return;
@@ -140,16 +146,38 @@ function laske() {
         return;
     }
 
-    let tulos;
+ let tulos;
     switch(op) {
         case "+": tulos = a + b; break;
         case "-": tulos = a - b; break;
         case "*": tulos = a * b; break;
-        case "/": tulos = a / b; break;
+        case "/": tulos = (a / b).toFixed(4); break;
     }
 
-    document.getElementById("tulos").innerHTML = 
-        `${a} ${op} ${b} = <strong>${Number(tulos.toFixed(4))}</strong>`;
+    const laskutoimitus = `${a} ${op} ${b} = ${tulos}`;
+
+    document.getElementById("tulos").innerHTML = laskutoimitus;
+
+    historia.unshift(laskutoimitus);
+
+    paivitaHistoria();
+}
+
+function paivitaHistoria() {
+    const historiaDiv = document.getElementById("historia");
+    historiaDiv.innerHTML = "";
+
+    if (historia.length === 0) {
+        historiaDiv.innerHTML = "<p style='color:#888; text-align:center;'>Ei vielä laskutoimituksia</p>";
+        return;
+    }
+
+    historia.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "historia-item";
+        div.textContent = item;
+        historiaDiv.appendChild(div);
+    });
 }
 
 function naytaVirhe(viesti) {
@@ -161,7 +189,10 @@ function suljeDialog() {
     document.getElementById("virheDialog").close();
 }
 
-window.onload = generoiSatunnaisetLuvut;
+window.onload = function() {
+    generoiSatunnaisetLuvut();
+    paivitaHistoria();
+};
 </script>
 
 </body>
