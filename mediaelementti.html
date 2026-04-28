@@ -21,5 +21,145 @@
             text-align: center;
             overflow: hidden;
         }
+        .karuselli img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: opacity 0.6s ease;
+        }
+        .karuselli h2 {
+            margin: 15px 0 8px 0;
+        }
+        .karuselli p {
+            font-size: 1.1em;
+            color: #555;
+            min-height: 50px;
+        }
+        .btn-group button {
+            font-size: 1.4em;
+            padding: 10px 18px;
+            margin: 0 8px;
+        }
+        .btn-play {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-play:hover {
+            background-color: #218838;
+        }
     </style>
+</head>
+<body>
+
+<div class="karuselli">
+    <h2>Mielenkiintoisia hetkiä kissan elämästä</h2>
+    
+    <img id="kuva" src="" alt="Karusellin kuva">
+    
+    <h2 id="otsikko"></h2>
+    <p id="teksti"></p>
+
+    <div class="btn-group" role="group">
+        <button onclick="edellinen()" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left-circle"></i> Edellinen
+        </button>
+        
+        <button id="playBtn" onclick="togglePlay()" class="btn btn-play">
+            <i class="bi bi-play-circle"></i> Toista
+        </button>
+        
+        <button onclick="seuraava()" class="btn btn-outline-primary">
+            Seuraava <i class="bi bi-arrow-right-circle"></i>
+        </button>
+    </div>
+</div>
+<script>
+const sisalto = [
+    {
+        title: "Pilli tutkimassa",
+        content: "Pilli on utelias ja tutkii aina uutta ympäristöä.",
+        image: "https://picsum.photos/id/1015/800/500"
+    },
+    {
+        title: "Pulla levossa",
+        content: "Pulla rakastaa nukkua auringonpaisteessa.",
+        image: "https://picsum.photos/id/201/800/500"
+    },
+    {
+        title: "Monni seikkailussa",
+        content: "Monni löytää aina uusia paikkoja piiloon.",
+        image: "https://picsum.photos/id/237/800/500"
+    },
+    {
+        title: "Kissat yhdessä",
+        content: "Ystävyys on kauneinta kun kissat leikkivät yhdessä.",
+        image: "https://picsum.photos/id/669/800/500"
+    }
+];
+
+let nykyinenIndex = 0;
+let intervalId = null;
+let onPaalla = false;
+
+function naytaSisalto(index) {
+    if (index < 0) index = sisalto.length - 1;
+    if (index >= sisalto.length) index = 0;
+
+    nykyinenIndex = index;
+
+    localStorage.setItem('karuselliIndex', nykyinenIndex);
+
+    const item = sisalto[index];
+
+    // jQuery fade-out + fade-in efekti
+    $("#kuva").fadeOut(400, function() {
+        $(this).attr("src", item.image).fadeIn(600);
+    });
+
+    $("#otsikko").fadeOut(300, function() {
+        $(this).text(item.title + " (" + item.date + ")").fadeIn(400);
+    });
+
+    $("#teksti").fadeOut(300, function() {
+        $(this).text(item.content).fadeIn(400);
+    });
+}
+
+function seuraava() {
+    naytaSisalto(nykyinenIndex + 1);
+}
+
+function edellinen() {
+    naytaSisalto(nykyinenIndex - 1);
+}
+
+function togglePlay() {
+    const btn = document.getElementById("playBtn");
+    
+    if (onPaalla) {
+        clearInterval(intervalId);
+        onPaalla = false;
+        btn.innerHTML = `<i class="bi bi-play-circle"></i> Toista`;
+    } else {
+        intervalId = setInterval(() => {
+            seuraava();
+        }, 4000); 
+        
+        onPaalla = true;
+        btn.innerHTML = `<i class="bi bi-pause-circle"></i> Pysäytä`;
+    }
+}
+
+window.onload = function() {
+    const tallennettu = localStorage.getItem('karuselliIndex');
+    if (tallennettu !== null) {
+        nykyinenIndex = parseInt(tallennettu);
+    }
+
+    naytaSisalto(nykyinenIndex);
+};
+</script>
+
+</body>
 </html>
