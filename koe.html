@@ -55,6 +55,12 @@
             margin-top: 15px;
             padding: 10px 20px;
         }
+        .info {
+            display: none;
+        }
+        .icon:hover ~ .info {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +70,9 @@
     <img align="left" src="images/aurelien-lemasson-theobald-x00CzBt4Dfk-unsplash.jpg" alt="Pizza" 
     width="600"
     height="500" />
+
+    <div class="icon">?</div>
+    <div class="info"></div>
 
     <h1>Valitse koko</h1>
 <td>
