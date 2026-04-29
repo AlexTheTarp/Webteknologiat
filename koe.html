@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilaa pizza</title>
+    <link rel="stylesheet" href="css/common.css"> 
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .number-box {
+            display: inline-block;
+            margin: 15px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 80px;
+            font-size: 2em;
+            text-align: center;
+            padding: 10px;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        select, #laskeBtn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 20px 10px;
+        }
+        #tulos {
+            margin-top: 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+            min-height: 60px;
+        }
+        dialog {
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        dialog button {
+            margin-top: 15px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Valitse koko</h1>
+
+    <div class="number-box">
+        </fieldset>
+        <fieldset>
+        <legend>Koko</legend>
+        <select id="select" name="koko">
+        <option value="Tavallinen">6e</option>
+        <option value="Perhepizza">12e</option>
+        </select>
+        </fieldset>
+        <fieldset>
+    </div>
+
+<form action="/action_page.php">
+    <h1>Tilaa pizza</h1>
+
+    <label for="täyte1"> Ananas</label><br>
+    <input type="checkbox" id="täyte1" name="täyte1" value="Ananas">
+    <label for="täyte2"> Kinkku</label><br>
+    <input type="checkbox" id="täyte2" name="täyte2" value="Kinkku">
+    <label for="täyte3"> Pepperoni</label><br><br>
+    <input type="checkbox" id="täyte3" name="täyte3" value="Pepperoni">
+    <label for="täyte4"> Aurajuusto</label><br><br>
+    <input type="checkbox" id="täyte4" name="täyte4" value="Boat">
+    <label for="täyte5"> Tonnikala</label><br><br>
+    <input type="checkbox" id="täyte5" name="täyte5" value="Tonnikala">
+</form>
+
+    <br><br>
+
+    <button id="laskeBtn" onclick="laske()">Laske</button>
+
+    <div id="tulos">Tulos</div>
+
+    <h2>Laskuhistoria</h2>
+    <div id="historia">
+    </div>
+</div>
+
+<dialog id="virheDialog">
+    <p id="virheViesti"></p>
+    <button onclick="suljeDialog()">OK</button>
+</dialog>
+
+<script>
+
+let historia = [];
+
+function generoiSatunnaisetLuvut() {
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+    
+    document.getElementById("numA").value = a;
+    document.getElementById("numB").value = b;
+}
+
+function muutaLukua(kumpi, muutos) {
+    const id = kumpi === 'a' ? 'numA' : 'numB';
+    let arvo = parseInt(document.getElementById(id).value);
+    
+    arvo += muutos;
+    
+    if (arvo < 1) arvo = 1;
+    if (arvo > 10) arvo = 10;
+    
+    document.getElementById(id).value = arvo;
+}
+
+function laske() {
+    const numA = document.getElementById("numA").value;
+    const numB = document.getElementById("numB").value;
+    const op = document.getElementById("operaattori").value;
+
+    if (numA === "" || numB === "") {
+        naytaVirhe("Molemmat luvut ovat pakollisia!");
+        return;
+    }
+
+    const a = parseInt(numA);
+    const b = parseInt(numB);
+
+    if (isNaN(a) || isNaN(b) || a < 1 || a > 10 || b < 1 || b > 10) {
+        naytaVirhe("Lukujen tulee olla kokonaislukuja välillä 1–10.");
+        return;
+    }
+
+    if (op === "/" && b === 0) {
+        naytaVirhe("Jakaminen nollalla ei ole sallittua!");
+        return;
+    }
+
+ let tulos;
+    switch(op) {
+        case "+": tulos = a + b; break;
+        case "-": tulos = a - b; break;
+        case "*": tulos = a * b; break;
+        case "/": tulos = (a / b).toFixed(4); break;
+    }
+
+    const laskutoimitus = `${a} ${op} ${b} = ${tulos}`;
+
+    document.getElementById("tulos").innerHTML = laskutoimitus;
+
+    historia.unshift(laskutoimitus);
+
+    paivitaHistoria();
+}
+
+function paivitaHistoria() {
+    const historiaDiv = document.getElementById("historia");
+    historiaDiv.innerHTML = "";
+
+    if (historia.length === 0) {
+        historiaDiv.innerHTML = "<p style='color:#888; text-align:center;'>Ei vielä laskutoimituksia</p>";
+        return;
+    }
+
+    historia.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "historia-item";
+        div.textContent = item;
+        historiaDiv.appendChild(div);
+    });
+}
+
+function naytaVirhe(viesti) {
+    document.getElementById("virheViesti").textContent = viesti;
+    document.getElementById("virheDialog").showModal();
+}
+
+function suljeDialog() {
+    document.getElementById("virheDialog").close();
+}
+
+window.onload = function() {
+    generoiSatunnaisetLuvut();
+    paivitaHistoria();
+};
+</script>
+
+</body>
+</html>
