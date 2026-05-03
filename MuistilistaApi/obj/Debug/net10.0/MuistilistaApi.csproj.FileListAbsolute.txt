@@ -32,3 +32,5 @@ C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\obj\Debug\
 C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\obj\Debug\net10.0\MuistilistaApi.pdb
 C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\obj\Debug\net10.0\MuistilistaApi.genruntimeconfig.cache
 C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\obj\Debug\net10.0\ref\MuistilistaApi.dll
+C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\bin\Debug\net10.0\MuistilistaApi.staticwebassets.runtime.json
+C:\Users\Alex\OneDrive - LUT University\Webteknologiat\MuistilistaApi\obj\Debug\net10.0\compressed\4wsuoaizik-{0}-rt992ldcpx-rt992ldcpx.gz
