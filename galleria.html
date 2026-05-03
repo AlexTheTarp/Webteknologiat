@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galleria</title>
+    <link rel="stylesheet" href="css/common.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f9fa; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 20px; }
+        
+        /* Karuselli */
+        .karuselli {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .karuselli img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Galleria */
+        .galleria {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .view-buttons {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .view-buttons button {
+            font-size: 1.6em;
+            padding: 10px 18px;
+            margin: 0 8px;
+        }
+        .view-buttons button.active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .grid-item {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .grid-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* List */
+        .list-container {
+            display: block;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .list-item img {
+            width: 220px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="karuselli">
+        <h2>Mielenkiintoisia kuvia elämästä</h2>
+        <img id="kuva" src="" alt="">
+        <h3 id="otsikko"></h3>
+        <p id="teksti"></p>
+
+        <div class="view-buttons" style="margin-top:20px;">
+            <button onclick="edellinen()"><i class="bi bi-arrow-left-circle"></i> Edellinen</button>
+            <button id="playBtn" onclick="togglePlay()" style="background:#28a745; color:white;">
+                <i class="bi bi-play-circle"></i> Toista
+            </button>
+            <button onclick="seuraava()">Seuraava <i class="bi bi-arrow-right-circle"></i></button>
+        </div>
+    </div>
+
+    <div class="galleria">
+        <h2>Kuvagalleria</h2>
+        
+        <div class="view-buttons">
+            <button id="gridBtn" class="active"><i class="bi bi-grid-3x3-gap"></i></button>
+            <button id="listBtn"><i class="bi bi-list"></i></button>
+        </div>
+
+        <div id="image-container" class="grid-container"></div>
+    </div>
+</div>
+
+<script>
+const karuselliSisalto = [
+    { title: "Trooppinen ranta", content: "Kirkkaansininen meri ja valkoinen hiekka.", image: "https://picsum.photos/id/1015/800/500" },
+    { title: "Kaupunkinäkymä", content: "Moderni kaupunki ilta-auringossa.", image: "https://picsum.photos/id/201/800/500" },
+    { title: "Vuoristojärvi", content: "Tyyni järvi vuorten ympäröimänä.", image: "https://picsum.photos/id/237/800/500" },
+    { title: "Metsäpolku", content: "Valo siivilöityy puiden läpi.", image: "https://picsum.photos/id/669/800/500" }
+];
+
+let nykyinenIndex = 0;
+let intervalId = null;
+
+function naytaKaruselli(index) {
+    if (index < 0) index = karuselliSisalto.length - 1;
+    if (index >= karuselliSisalto.length) index = 0;
+    nykyinenIndex = index;
+
+    const item = karuselliSisalto[index];
+    $("#kuva").fadeOut(400, function() { $(this).attr("src", item.image).fadeIn(600); });
+    $("#otsikko").text(item.title);
+    $("#teksti").text(item.content);
+}
+
+function seuraava() { naytaKaruselli(nykyinenIndex + 1); }
+function edellinen() { naytaKaruselli(nykyinenIndex - 1); }
+
+function togglePlay() {
+    const btn = document.getElementById("playBtn");
+    if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        btn.innerHTML = `<i class="bi bi-play-circle"></i> Toista`;
+    } else {
+        intervalId = setInterval(seuraava, 4000);
+        btn.innerHTML = `<i class="bi bi-pause-circle"></i> Pysäytä`;
+    }
+}
+
+const galleriaKuvat = [
+    { title: "Trooppinen ranta", image: "https://picsum.photos/id/1015/800/500" },
+    { title: "Kaupunkinäkymä", image: "https://picsum.photos/id/201/800/500" },
+    { title: "Vuoristojärvi", image: "https://picsum.photos/id/237/800/500" },
+    { title: "Metsäpolku", image: "https://picsum.photos/id/669/800/500" },
+    { title: "Auringonlasku", image: "https://picsum.photos/id/1016/800/500" },
+    { title: "Järvimaisema", image: "https://picsum.photos/id/133/800/500" }
+];
+
+function luoGalleria() {
+    const container = document.getElementById('image-container');
+    container.innerHTML = '';
+    
+    galleriaKuvat.forEach(kuva => {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        div.innerHTML = `
+            <img src="${kuva.image}" alt="${kuva.title}">
+            <p><strong>${kuva.title}</strong></p>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function vaihdaNakyma(tyyppi) {
+    const container = document.getElementById('image-container');
+    document.getElementById('gridBtn').classList.toggle('active', tyyppi === 'grid');
+    document.getElementById('listBtn').classList.toggle('active', tyyppi === 'list');
+    
+    if (tyyppi === 'grid') {
+        container.classList.remove('list-container');
+        container.classList.add('grid-container');
+    } else {
+        container.classList.remove('grid-container');
+        container.classList.add('list-container');
+    }
+}
+
+window.onload = function() {
+    naytaKaruselli(0);
+    luoGalleria();
+    vaihdaNakyma('grid');
+
+    document.getElementById('gridBtn').addEventListener('click', () => vaihdaNakyma('grid'));
+    document.getElementById('listBtn').addEventListener('click', () => vaihdaNakyma('list'));
+};
+</script>
+
+</body>
+</html>
