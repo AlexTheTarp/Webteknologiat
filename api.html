@@ -14,98 +14,77 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
     <style>
-        .loader { display: none; margin: 30px auto; }
-        .alert { margin: 20px 0; }
+        .loader { display: none; width: 60px; margin: 20px auto; }
     </style>
 </head>
-<body class="bg-light">
+<body class="bg-light p-4">
 
-<div class="container mt-5">
-    <div class="card shadow mx-auto" style="max-width: 800px;">
-        <div class="card-body p-5 text-center">
-            <h1 class="mb-4">Numbers API</h1>
-            <p class="text-muted mb-4">Hae mielenkiintoista tietoa numerosta</p>
+<div class="container" style="max-width: 900px;">
+    <h2 class="text-center mb-4">Numbers API</h2>
+    <p class="text-center text-muted">Hae mielenkiintoista tietoa numerosta</p>
 
-            <button onclick="haeFakta()" class="btn btn-primary btn-lg px-5 mb-4">
-                Hae satunnainen fakta
-            </button>
-
-            <div id="loader" class="loader">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-3">Ladataan tietoa...</p>
-            </div>
-
-            <div id="tulos"></div>
-
-            <div class="mt-5">
-                <h3>Bootstrap Accordion</h3>
-                <div id="bootstrapAcc" class="accordion mt-3"></div>
-            </div>
-
-            <div class="mt-5">
-                <h3>jQuery UI Accordion</h3>
-                <div id="jqueryAcc" class="mt-3"></div>
-            </div>
-        </div>
+    <div class="text-center mb-4">
+        <button onclick="haeFakta()" class="btn btn-primary btn-lg">Hae satunnainen fakta</button>
     </div>
+
+    <img id="loader" class="loader" src="https://i.gifer.com/ZZ5H.gif" alt="Ladataan...">
+
+    <div id="tulos" class="text-center"></div>
+
+    <h4 class="mt-5">Bootstrap Accordion</h4>
+    <div id="bootstrapAccordion" class="accordion mb-5"></div>
+
+    <h4>jQuery UI Accordion</h4>
+    <div id="jqueryAccordion"></div>
 </div>
 
 <script>
-let hakuLaskuri = 0;
+let counter = 0;
 
 async function haeFakta() {
-    const loader = document.getElementById('loader');
-    const tulosDiv = document.getElementById('tulos');
-    
-    loader.style.display = 'block';
-    tulosDiv.innerHTML = '';
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("tulos").innerHTML = "";
 
     try {
-        const proxy = "https://api.allorigins.win/raw?url=";
-        const url = encodeURIComponent("http://numbersapi.com/random?json");
+        const res = await fetch('https://api.allorigins.win/raw?url=' + 
+            encodeURIComponent('https://numbersapi.com/random?json'));
         
-        const response = await fetch(proxy + url);
-        const data = await response.json();
+        const data = await res.json();
+        counter++;
 
-        hakuLaskuri++;
-
-        tulosDiv.innerHTML = `
-            <div class="alert alert-success fs-5">
+        document.getElementById("tulos").innerHTML = `
+            <div class="alert alert-success">
                 <strong>${data.number}</strong>: ${data.text}
-            </div>
-        `;
+            </div>`;
 
-        const bsHTML = `
+        const bsItem = `
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button ${hakuLaskuri === 1 ? '' : 'collapsed'}" 
-                            type="button" data-bs-toggle="collapse" data-bs-target="#bs${hakuLaskuri}">
-                        ${hakuLaskuri}. haku — ${data.number}
+                    <button class="accordion-button ${counter === 1 ? '' : 'collapsed'}" 
+                            type="button" data-bs-toggle="collapse" data-bs-target="#collapse${counter}">
+                        Fakta #${counter} — ${data.number}
                     </button>
                 </h2>
-                <div id="bs${hakuLaskuri}" class="accordion-collapse collapse ${hakuLaskuri === 1 ? 'show' : ''}">
+                <div id="collapse${counter}" class="accordion-collapse collapse ${counter === 1 ? 'show' : ''}">
                     <div class="accordion-body">${data.text}</div>
                 </div>
             </div>`;
-        document.getElementById('bootstrapAcc').innerHTML += bsHTML;
+        document.getElementById("bootstrapAccordion").innerHTML += bsItem;
 
-        const jq = $("#jqueryAcc");
-        jq.append(`<h3>${hakuLaskuri}. haku — ${data.number}</h3><div><p>${data.text}</p></div>`);
+        const jq = $("#jqueryAccordion");
+        jq.append(`<h3>Fakta #${counter} — ${data.number}</h3><div><p>${data.text}</p></div>`);
         jq.accordion("refresh");
 
-    } catch (err) {
-        tulosDiv.innerHTML = `
-            <div class="alert alert-danger">
-                Virhe haussa. Kokeile uudelleen.
-            </div>`;
-        console.error(err);
+    } catch (e) {
+        document.getElementById("tulos").innerHTML = `
+            <div class="alert alert-danger">Virhe haussa. Kokeile uudelleen.</div>`;
     } finally {
-        loader.style.display = 'none';
+        document.getElementById("loader").style.display = "none";
     }
 }
 
 $(function() {
-    $("#jqueryAcc").accordion({
+    $("#jqueryAccordion").accordion({
         collapsible: true,
         heightStyle: "content"
     });
