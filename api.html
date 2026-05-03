@@ -54,7 +54,7 @@ async function haeSatunnainenNumero() {
     tulosDiv.innerHTML = '';
 
     try {
-        const response = await fetch('http://numbersapi.com/random?json');
+        const response = await fetch('https://numbersapi.com/random?json');
         const data = await response.json();
 
         hakuLaskuri++;
