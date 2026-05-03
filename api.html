@@ -46,7 +46,7 @@ async function haeFakta() {
     document.getElementById("tulos").innerHTML = "";
 
     try {
-        const res = await fetch('https://api.allorigins.win/raw?url=' + 
+        const res = await fetch('https://corsproxy.io/?' + 
             encodeURIComponent('https://numbersapi.com/random?json'));
         
         const data = await res.json();
