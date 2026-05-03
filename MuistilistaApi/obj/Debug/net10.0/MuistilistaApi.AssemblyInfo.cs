@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MuistilistaApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68c46aa71ef61b6b3b5c962ff4ecb8cd6cd2f0d0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72dd95e9e251140eb6747f2a9983550c04c2b78e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MuistilistaApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MuistilistaApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
