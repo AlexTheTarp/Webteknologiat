@@ -12,15 +12,16 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-var todoList = new List<Todo>
-{
-    new Todo { Id = 1, Title = "Hae maitoa", Description = "Käy kaupassa hakemassa maitoa ja leipää", Complete = false, Cancelled = false, Date = DateTime.Now.AddDays(-1) },
-    new Todo { Id = 2, Title = "Korjaa polkupyörä", Description = "Tarkista jarrut ja voitele ketju", Complete = true, Cancelled = false, Date = DateTime.Now.AddDays(-3) },
-    new Todo { Id = 3, Title = "Laske verot", Description = "Tee veroilmoitus ennen määräaikaa", Complete = false, Cancelled = false, Date = DateTime.Now }
-};
+// Tarjoile staattiset tiedostot (wwwroot)
+app.UseStaticFiles();
 
+// Jos mennään juuriosoitteeseen, ohjataan index.html:ään
+app.MapGet("/", () => Results.Redirect("/index.html"));
+
+// Hae kaikki tehtävät
 app.MapGet("/tasks", () => todoList);
 
+// Hae yksittäinen tehtävä
 app.MapGet("/task/{id}", (int id) =>
 {
     var task = todoList.FirstOrDefault(t => t.Id == id);
@@ -28,6 +29,14 @@ app.MapGet("/task/{id}", (int id) =>
 });
 
 app.Run();
+
+// Todo-luokka + esimerkkidata
+var todoList = new List<Todo>
+{
+    new Todo { Id = 1, Title = "Hae maitoa", Description = "Käy kaupassa hakemassa maitoa", Complete = false, Cancelled = false, Date = DateTime.Now.AddDays(-1) },
+    new Todo { Id = 2, Title = "Korjaa polkupyörä", Description = "Tarkista jarrut ja ketju", Complete = true, Cancelled = false, Date = DateTime.Now.AddDays(-2) },
+    new Todo { Id = 3, Title = "Laske verot", Description = "Tee veroilmoitus", Complete = false, Cancelled = false, Date = DateTime.Now }
+};
 
 public class Todo
 {
