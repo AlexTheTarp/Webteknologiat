@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilaa pizza</title>
+    <link rel="stylesheet" href="css/common.css"> 
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container {
+            max-width: flex;
+            margin: 40px auto;
+            padding: 30px;
+            background: #f8c303;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .number-box {
+            display: inline-block;
+            margin: 15px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 80px;
+            font-size: 2em;
+            text-align: center;
+            padding: 10px;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        select, #laskeBtn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 20px 10px;
+        }
+        #tulos {
+            margin-top: 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+            min-height: 60px;
+        }
+        dialog {
+            padding: 20px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        dialog button {
+            margin-top: 15px;
+            padding: 10px 20px;
+        }
+        .info {
+            display: none;
+        }
+        .icon:hover ~ .info {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <img align="left" src="images/aurelien-lemasson-theobald-x00CzBt4Dfk-unsplash.jpg" alt="Pizza" 
+    width="600"
+    height="500" />
+
+    <div align="left" class="icon">?</div>
+    <div class="info">Lisätietoja</div>
+
+    <h1>Valitse koko</h1>
+<td>
+    <label align="center" for="Valitse"> Koko</label>
+    <select> 
+    <option>Valitse</option>
+    <option>Tavallinen pizza 6e</option>
+    <option>Perhepizza 12e</option> 
+    </select>
+</td>
+
+<form align="center" action="/action_page.php">
+    <h1>Tilaa pizza</h1>
+    <label for="täyte1"> Ananas</label>
+    <input type="checkbox" id="täyte1" name="täyte1" value="Ananas"><br><br>
+    <label for="täyte2"> Kinkku</label>
+    <input type="checkbox" id="täyte2" name="täyte2" value="Kinkku"><br><br>
+    <label for="täyte3"> Pepperoni</label>
+    <input type="checkbox" id="täyte3" name="täyte3" value="Pepperoni"><br><br>
+    <label for="täyte4"> Aurajuusto</label>
+    <input type="checkbox" id="täyte4" name="täyte4" value="Boat"><br><br>
+    <label for="täyte5"> Tonnikala</label>
+    <input type="checkbox" id="täyte5" name="täyte5" value="Tonnikala">
+</form>
+
+    <br><br>
+    <section align="center" id="cart" class="section">
+        <div id="cart-items">
+        </div>
+        <div id="total-price">
+            Hinta yhteensä 0
+        </div>
+        <button id="Tilaa-btn float-right">Tilaa</button>
+    </section>
+</div>
+
+<script>
+
+
+
+</script>
+
+</body>
+</html>
